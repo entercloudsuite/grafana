@@ -9,17 +9,17 @@ dashboard = Dashboard(
         dataSource='Prometheus',
         targets=[
           Target(
-            expr='avg(node_load1{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
+            expr='avg(node_load1{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu))',
             legendFormat="Load 1",
             refId='A',
           ),
           Target(
-            expr='avg(node_load5{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
+            expr='avg(node_load5{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu))',
             legendFormat="Load 5",
             refId='B',
           ),
           Target(
-            expr='avg(node_load15{job="haproxy"}) /  count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
+            expr='avg(node_load15{job="haproxy"}) /  count(count(node_cpu{job="haproxy"}) by (cpu))',
             legendFormat="Load 15",
             refId='C',
           ),
@@ -38,8 +38,8 @@ dashboard = Dashboard(
             refId='A',
           ),
           Target(
-            expr='node_memory_MemFree{job="haproxy"}',
-            legendFormat="Free",
+            expr='node_memory_MemAvailable{job="haproxy"}',
+            legendFormat="Available",
             refId='B',
           )
         ],
