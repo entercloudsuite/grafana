@@ -1,6 +1,5 @@
 from grafanalib.core import *
 
-
 dashboard = Dashboard(
   title="Example Frontend Stats",
   rows=[
@@ -10,24 +9,44 @@ dashboard = Dashboard(
         dataSource='Prometheus',
         targets=[
           Target(
-            expr='node_load1{job="haproxy"}',
+            expr='avg(node_load1{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
             legendFormat="Load 1",
             refId='A',
           ),
           Target(
-            expr='node_load5{job="haproxy"}',
+            expr='avg(node_load5{job="haproxy"}) / count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
             legendFormat="Load 5",
             refId='B',
           ),
           Target(
-            expr='node_load15{job="haproxy"}',
+            expr='avg(node_load15{job="haproxy"}) /  count(count(node_cpu{job="haproxy"}) by (cpu)) * 100',
             legendFormat="Load 15",
             refId='C',
           ),
         ],
         yAxes=[
-          YAxis(format=OPS_FORMAT),
-          YAxis(format=SHORT_FORMAT),
+          YAxis(format=PERCENT_UNIT_FORMAT)
+        ],
+      ),
+    ]),
+    Row(panels=[
+      Graph(
+        title="Frontend memory",
+        dataSource='Prometheus',
+        targets=[
+          Target(
+            expr='node_memory_MemTotal{job="haproxy"}',
+            legendFormat="Total",
+            refId='A',
+          ),
+          Target(
+            expr='node_memory_MemFree{job="haproxy"}',
+            legendFormat="Free",
+            refId='B',
+          )
+        ],
+        yAxes=[
+          YAxis(format=BYTES_FORMAT),
         ],
       ),
     ]),
