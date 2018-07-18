@@ -26,8 +26,6 @@ dashboard = Dashboard(
         ],
         yAxes=single_y_axis(format=PERCENT_UNIT_FORMAT)
       ),
-    ]),
-    Row(panels=[
       Graph(
         title="Memory",
         dataSource='Prometheus',
@@ -44,6 +42,32 @@ dashboard = Dashboard(
           )
         ],
         yAxes=single_y_axis(format=BYTES_FORMAT)
+      ),
+    ]),
+    Row(panels=[
+      Graph(
+        title="Frontend responses by HTTP code",
+        dataSource='Prometheus',
+        targets=[
+          Target(
+            expr='sum(rate(haproxy_frontend_http_responses_total[5m])) by (code)',
+            legendFormat="{{ code }}",
+            refId='A',
+          )
+        ],
+        yAxes=single_y_axis(format=SHORT_FORMAT)
+      ),
+      Graph(
+        title="Backend responses by HTTP code",
+        dataSource='Prometheus',
+        targets=[
+          Target(
+            expr='sum(rate(haproxy_backend_http_responses_total[5m])) by (code)',
+            legendFormat="{{ code }}",
+            refId='A',
+          )
+        ],
+        yAxes=single_y_axis(format=SHORT_FORMAT)
       ),
     ]),
   ],
