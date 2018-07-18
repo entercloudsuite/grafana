@@ -24,9 +24,7 @@ dashboard = Dashboard(
             refId='C',
           ),
         ],
-        yAxes=[
-          YAxis(format=PERCENT_UNIT_FORMAT)
-        ],
+        yAxes=single_y_axis(format=PERCENT_UNIT_FORMAT)
       ),
     ]),
     Row(panels=[
@@ -45,9 +43,7 @@ dashboard = Dashboard(
             refId='B',
           )
         ],
-        yAxes=[
-          YAxis(format=BYTES_FORMAT),
-        ],
+        yAxes=single_y_axis(format=BYTES_FORMAT)
       ),
     ]),
   ],
