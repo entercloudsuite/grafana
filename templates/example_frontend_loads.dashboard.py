@@ -5,7 +5,7 @@ dashboard = Dashboard(
   rows=[
     Row(panels=[
       Graph(
-        title="Frontend loads",
+        title="Load",
         dataSource='Prometheus',
         targets=[
           Target(
@@ -29,7 +29,7 @@ dashboard = Dashboard(
     ]),
     Row(panels=[
       Graph(
-        title="Frontend memory",
+        title="Memory",
         dataSource='Prometheus',
         targets=[
           Target(
